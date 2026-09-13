@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alok - Video Editor & Sketch Artist</title>
+  <meta name="description" content="I'm Alok. I edit videos and sketch things I love. 8 years of editing, 100+ videos, 5M+ views. This is my creative space.">
+  <meta name="theme-color" content="#06060b">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">alok.</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#edits">Edits</a></li>
+      <li><a href="#sketches">Sketches</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile overlay -->
+  <div class="nav-mobile-overlay" id="mobileNav">
+    <a href="#about">About</a>
+    <a href="#edits">Edits</a>
+    <a href="#sketches">Sketches</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <div class="hero-label reveal">
+        <span class="dot"></span>
+        Creative Space
+      </div>
+      <h1 class="reveal reveal-delay-1">
+        I edit videos<br>&amp; I <span class="gradient-text">sketch</span> things.
+      </h1>
+      <p class="hero-subtitle reveal reveal-delay-2">
+        I'm Alok , 8 years of video editing, 5M+ views, and a love for putting pencil to paper.
+      </p>
+      <div class="hero-stats reveal reveal-delay-3">
+        <div class="hero-stat">
+          <div class="hero-stat-number">8+</div>
+          <div class="hero-stat-label">Years Editing</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">500+</div>
+          <div class="hero-stat-label">Videos Made</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">5M+</div>
+          <div class="hero-stat-label">Total Views</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <div class="section-divider"></div>
+  <section class="section" id="about">
+    <div class="section-header reveal">
+      <span class="section-label">About Me</span>
+      <h2 class="section-title">A bit about what I do</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Started editing with screen recordings in <strong>XRecorder</strong>, leveled up through 
+          <strong>KineMaster</strong>, <strong>Vita</strong>, and <strong>CapCut</strong> now I work in 
+          <strong>DaVinci Resolve</strong>. <strong>500+ videos</strong> and <strong>5M+ views</strong> later, 
+          I'm still at it.
+        </p>
+        <p>
+          Sketching is the quieter side. When something catches my eye, I put it on paper. 
+          Two different kinds of creativity, I love both equally.
+        </p>
+      </div>
+      <div class="journey reveal reveal-delay-2" id="journeySection">
+        <div class="journey-title">
+          ✦ My Editing Journey
+        </div>
+        <div class="journey-timeline" id="journeyTimeline">
+          <div class="journey-progress-line" id="journeyProgressLine"></div>
+          <div class="journey-step" data-step="0">
+            <div class="journey-step-name">XRecorder</div>
+            <div class="journey-step-note">Where it all started</div>
+          </div>
+          <div class="journey-step" data-step="1">
+            <div class="journey-step-name">KineMaster</div>
+            <div class="journey-step-note">Learning the basics</div>
+          </div>
+          <div class="journey-step" data-step="2">
+            <div class="journey-step-name">Vita</div>
+            <div class="journey-step-note">Quick edits, fun templates</div>
+          </div>
+          <div class="journey-step" data-step="3">
+            <div class="journey-step-name">CapCut</div>
+            <div class="journey-step-note">Better effects, better flow</div>
+          </div>
+          <div class="journey-step" data-step="4">
+            <div class="journey-step-name">DaVinci Resolve</div>
+            <div class="journey-step-note">Where I am today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO EDITS — Scroll showcase ===== -->
+  <div class="section-divider"></div>
+  <section class="section" id="edits">
+    <div class="section-header reveal">
+      <span class="section-label">Video Edits</span>
+      <h2 class="section-title">Recent work</h2>
+    </div>
+    <div class="videos-showcase">
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260912152125.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Rengoku</span>
+          <span class="video-card-badge">Latest</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260912145330.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Grid Transition</span>
+          <span class="video-card-badge">Latest</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260728153128.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Spider Man BND</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/VID-20260724-WA0007.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Tanjiro</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260708195733.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Kung Fu Panda</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260530141335.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Your Name</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260527164845.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Moon Knight</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260517213011.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Tanjiro 2</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video controls preload="none" playsinline>
+          <source data-src="Edits/lv_0_20260513151901.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-info">
+          <span class="video-card-label">Iron Man</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SKETCHES ===== -->
+  <div class="section-divider"></div>
+  <section class="section" id="sketches">
+    <div class="section-header reveal">
+      <span class="section-label">Sketches</span>
+      <h2 class="section-title">Things I've drawn</h2>
+    </div>
+    <div class="sketches-grid">
+
+      <div class="sketch-card" data-index="0">
+        <img src="Sketchs/IMG_20260516_204227.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="1">
+        <img src="Sketchs/IMG_20260513_231609_646.webp" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="2">
+        <img src="Sketchs/IMG_20260513_231401_096.webp" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="3">
+        <img src="Sketchs/IMG_20260512_181804.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="4">
+        <img src="Sketchs/IMG_20260504_215423.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="5">
+        <img src="Sketchs/IMG_20260504_171132.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="6">
+        <img src="Sketchs/IMG_20260502_130724.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="7">
+        <img src="Sketchs/IMG_20260423_221858.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="8">
+        <img src="Sketchs/IMG_20260420_210725.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="9">
+        <img src="Sketchs/IMG_20260410_110602.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="10">
+        <img src="Sketchs/IMG_20260408_213535.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="11">
+        <img src="Sketchs/IMG_20260404_210240.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="12">
+        <img src="Sketchs/IMG_20260404_204401.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="13">
+        <img src="Sketchs/IMG_20260401_231011.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="14">
+        <img src="Sketchs/IMG_20260302_015250.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="15">
+        <img src="Sketchs/IMG20260320230709.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="16">
+        <img src="Sketchs/IMG20260304225316.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="17">
+        <img src="Sketchs/IMG_20260110_225734_178.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="18">
+        <img src="Sketchs/IMG_20251216_225243_752.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="19">
+        <img src="Sketchs/IMG_20251210_175713_811.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="20">
+        <img src="Sketchs/20260223_011453.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="21">
+        <img src="Sketchs/20260222_181524.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="22">
+        <img src="Sketchs/20260216_134549.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous sketch">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <img src="" alt="Sketch fullsize" id="lightboxImg">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next sketch">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+    </button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-name">alok.</div>
+    <p class="footer-tagline">editing videos & sketching things since way back.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
