@@ -64,7 +64,7 @@
   transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
 }
 
-.mobile-play-btn {
+.custom-play-pause {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -83,23 +83,46 @@
   z-index: 10;
   opacity: 0.8;
   transition: all 0.4s var(--ease-out-back);
+  pointer-events: none; /* Let wrapper handle clicks */
 }
 
-.mobile-play-btn svg {
+.custom-play-pause svg {
   width: 24px;
   height: 24px;
   fill: var(--accent);
-  margin-left: 4px; /* visually center the play triangle */
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Pulse effect for mobile play button */
+.custom-play-pause .icon-play {
+  margin-left: 4px; /* visually center the play triangle */
+  opacity: 1;
+  transform: scale(1);
+}
+
+.custom-play-pause .icon-pause {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* When playing, the wrapper gets .is-playing class */
+.video-card.is-playing .custom-play-pause .icon-play {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.video-card.is-playing .custom-play-pause .icon-pause {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pulse effect for play button */
 @keyframes playPulse {
   0% { box-shadow: 0 0 0 0 rgba(232, 160, 52, 0.4); }
   70% { box-shadow: 0 0 0 20px rgba(232, 160, 52, 0); }
   100% { box-shadow: 0 0 0 0 rgba(232, 160, 52, 0); }
 }
 
-.mobile-play-btn {
+.video-card:not(.is-playing) .custom-play-pause {
   animation: playPulse 2.5s infinite;
 }
 
@@ -109,10 +132,9 @@
     opacity: 1;
     transform: scale(1);
   }
-  .video-card:hover .mobile-play-btn {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.2);
-    pointer-events: none;
+.video-card:hover .custom-play-pause {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.1);
   }
 }
 
@@ -120,29 +142,22 @@
   opacity: 1;
   transform: scale(1);
 }
-.video-card.is-playing .mobile-play-btn {
+.video-card.is-playing .custom-play-pause {
   opacity: 0;
-  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+/* Remove heavy shadow on playing to optimize performance */
+.video-card.is-playing {
+  box-shadow: none !important;
+  border-color: var(--border-glass) !important;
 }
 
 /* --- Fix Fullscreen Behavior --- */
-video:fullscreen {
-  object-fit: contain !important;
-  transform: none !important;
-  border-radius: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: auto !important;
+.video-wrapper:fullscreen {
+  background: #000;
 }
-video:-webkit-full-screen {
-  object-fit: contain !important;
-  transform: none !important;
-  border-radius: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: auto !important;
-}
-video:-moz-full-screen {
+.video-wrapper:fullscreen video {
   object-fit: contain !important;
   transform: none !important;
   border-radius: 0 !important;
@@ -151,13 +166,36 @@ video:-moz-full-screen {
   aspect-ratio: auto !important;
 }
 
-/* Hide duplicate native play button overlay on mobile */
-video::-webkit-media-controls-overlay-play-button {
-  display: none !important;
+.video-wrapper:-webkit-full-screen {
+  background: #000;
 }
-video::-webkit-media-controls-start-playback-button {
+.video-wrapper:-webkit-full-screen video {
+  object-fit: contain !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+
+.video-wrapper:-moz-full-screen {
+  background: #000;
+}
+.video-wrapper:-moz-full-screen video {
+  object-fit: contain !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+
+/* Hide native play buttons on mobile completely */
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-play-button {
   display: none !important;
-  -webkit-appearance: none;
+  -webkit-appearance: none !important;
 }
 
 /* --- Sketches Staggered Reveal --- */
