@@ -125,6 +125,41 @@
   pointer-events: none;
 }
 
+/* --- Fix Fullscreen Behavior --- */
+video:fullscreen {
+  object-fit: contain !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+video:-webkit-full-screen {
+  object-fit: contain !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+video:-moz-full-screen {
+  object-fit: contain !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+}
+
+/* Hide duplicate native play button overlay on mobile */
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 /* --- Sketches Staggered Reveal --- */
 .sketch-card {
   transform-origin: center center;
