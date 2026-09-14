@@ -94,7 +94,7 @@
       }
       if (!video.src && !video.currentSrc) {
         video.src = source.dataset.src;
-        video.preload = 'metadata';
+        video.preload = 'auto';
         video.load();
       }
     }
@@ -176,7 +176,7 @@
 
       source.src = source.dataset.src;
       video.src = source.dataset.src;
-      video.preload = 'metadata'; // Keeps download lightweight (only metadata/first frame)
+      video.preload = 'auto'; // Progressive background buffering
       video.load();
 
       const markDone = () => {
@@ -186,10 +186,10 @@
         processQueue();
       };
 
-      video.addEventListener('loadedmetadata', markDone, { once: true });
-      video.addEventListener('canplay', markDone, { once: true });
+      video.addEventListener('canplaythrough', markDone, { once: true });
+      video.addEventListener('canplay', markDone, { once: true }); // Fallback if canplaythrough is delayed
       video.addEventListener('error', markDone, { once: true });
-      setTimeout(markDone, 8000); // Guard timeout
+      setTimeout(markDone, 15000); // Guard timeout increased for buffering
     }
 
     // --- Decide what to load next ---
@@ -234,10 +234,8 @@
 
     // --- Load the first video on startup, then prepare subsequent videos sequentially ---
     function kickoff() {
-      setTimeout(() => {
-        loadVideo(0);
-        sequentialNext = 1;
-      }, 600);
+      loadVideo(0);
+      sequentialNext = 1;
     }
 
     if (document.readyState === 'complete') {
