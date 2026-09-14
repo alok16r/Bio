@@ -610,22 +610,6 @@
       });
     });
 
-    // Handle fullscreen to prevent device auto-rotation
-    const handleFullscreen = () => {
-      const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-      if (isFullscreen) {
-        if (screen.orientation && screen.orientation.type && screen.orientation.lock) {
-          // Lock to the current orientation to prevent auto-rotation
-          screen.orientation.lock(screen.orientation.type).catch(() => {});
-        }
-      } else {
-        if (screen.orientation && screen.orientation.unlock) {
-          screen.orientation.unlock();
-        }
-      }
-    };
-    document.addEventListener('fullscreenchange', handleFullscreen);
-    document.addEventListener('webkitfullscreenchange', handleFullscreen);
   }
 
   // ===== DEVICE 3D TILT =====
