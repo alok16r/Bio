@@ -81,9 +81,9 @@
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: all 0.4s var(--ease-out-back);
-  pointer-events: none; /* Let wrapper handle clicks */
+  pointer-events: auto; /* Allow direct touch & tap */
 }
 
 .custom-play-pause svg {
@@ -92,6 +92,7 @@
   fill: var(--accent);
   position: absolute;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
 }
 
 .custom-play-pause .icon-play {
@@ -132,9 +133,9 @@
     opacity: 1;
     transform: scale(1);
   }
-.video-card:hover .custom-play-pause {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(1.1);
+  .video-card:hover .custom-play-pause {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.08);
   }
 }
 
@@ -144,7 +145,8 @@
 }
 .video-card.is-playing .custom-play-pause {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.9);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.85);
 }
 
 /* Remove heavy shadow on playing to optimize performance */
@@ -153,34 +155,13 @@
   border-color: var(--border-glass) !important;
 }
 
-/* --- Fix Fullscreen Behavior --- */
-.video-wrapper:fullscreen {
-  background: #000;
-}
-.video-wrapper:fullscreen video {
-  object-fit: contain !important;
-  transform: none !important;
-  border-radius: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: auto !important;
-}
-
-.video-wrapper:-webkit-full-screen {
-  background: #000;
-}
-.video-wrapper:-webkit-full-screen video {
-  object-fit: contain !important;
-  transform: none !important;
-  border-radius: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: auto !important;
-}
-
-.video-wrapper:-moz-full-screen {
-  background: #000;
-}
+/* --- Fullscreen Behavior --- */
+/* Ensure 16:9 stays 16:9 with letterboxing and 9:16 stays vertical without cropping */
+video:fullscreen,
+video:-webkit-full-screen,
+video:-moz-full-screen,
+.video-wrapper:fullscreen video,
+.video-wrapper:-webkit-full-screen video,
 .video-wrapper:-moz-full-screen video {
   object-fit: contain !important;
   transform: none !important;
@@ -188,12 +169,18 @@
   width: 100% !important;
   height: 100% !important;
   aspect-ratio: auto !important;
+  background: #000 !important;
 }
 
-/* Hide native play buttons on mobile completely */
+.video-wrapper:fullscreen,
+.video-wrapper:-webkit-full-screen,
+.video-wrapper:-moz-full-screen {
+  background: #000 !important;
+}
+
+/* Hide duplicate native center play button overlay on mobile */
 video::-webkit-media-controls-overlay-play-button,
-video::-webkit-media-controls-start-playback-button,
-video::-webkit-media-controls-play-button {
+video::-webkit-media-controls-start-playback-button {
   display: none !important;
   -webkit-appearance: none !important;
 }

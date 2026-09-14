@@ -84,12 +84,34 @@
     revealElements.forEach(el => observer.observe(el));
   }
 
-  // ===== SEQUENTIAL VIDEO LOADER =====
-  // Loads videos ONLY when they approach the viewport (lazy loading)
-  // to avoid bandwidth contention, reduce RAM, and keep scrolling smooth.
+  // ===== HELPER: Ensure Video Source is Set =====
+  function ensureVideoSource(video) {
+    if (!video) return;
+    const source = video.querySelector('source');
+    if (source && source.dataset.src) {
+      if (!source.getAttribute('src')) {
+        source.src = source.dataset.src;
+      }
+      if (!video.src && !video.currentSrc) {
+        video.src = source.dataset.src;
+        video.preload = 'metadata';
+        video.load();
+      }
+    }
+  }
+
+  // ===== PROGRESSIVE SEQUENTIAL VIDEO LOADER =====
+  // Loads the first video on open, prepares subsequent videos sequentially in background,
+  // and prioritizes any video approaching viewport via IntersectionObserver.
   function setupVideoShowcase() {
     const videoCards = document.querySelectorAll('.video-card');
     if (videoCards.length === 0) return;
+
+    // Per-video state: 'idle' → 'loading' → 'loaded'
+    const states = Array.from(videoCards, () => 'idle');
+    let sequentialNext = 0;     // Next index for background progressive loading
+    let loadingIndex = -1;      // Index currently downloading (-1 = none)
+    const priorityQueue = [];   // Indices approaching viewport (load with priority)
 
     // --- 1. Card scroll-reveal animation ---
     const visibilityObserver = new IntersectionObserver((entries) => {
@@ -116,35 +138,113 @@
     }, { threshold: 0 });
     videoCards.forEach(card => playbackObserver.observe(card));
 
-    // --- 3. Lazy load videos as they get close to screen ---
-    const loadObserver = new IntersectionObserver((entries) => {
+    // --- 3. Priority observer: if user scrolls near a video, queue it next ---
+    const priorityObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const video = entry.target.querySelector('video');
-          const source = video ? video.querySelector('source') : null;
-          
-          if (source && source.dataset.src && !source.getAttribute('src')) {
-            source.src = source.dataset.src;
-            video.preload = 'metadata'; // Avoid auto-downloading entire video
-            video.load();
+          const idx = Array.from(videoCards).indexOf(entry.target);
+          if (idx !== -1 && states[idx] === 'idle' && !priorityQueue.includes(idx)) {
+            priorityQueue.push(idx);
+            processQueue();
           }
-          loadObserver.unobserve(entry.target);
+          priorityObserver.unobserve(entry.target);
         }
       });
     }, {
-      rootMargin: '300px 0px 300px 0px'
+      rootMargin: '400px 0px 200px 0px'  // Trigger well before the card is on-screen
     });
-    videoCards.forEach(card => loadObserver.observe(card));
+    videoCards.forEach(card => priorityObserver.observe(card));
+
+    // --- Load a single video by index ---
+    function loadVideo(index) {
+      if (index < 0 || index >= videoCards.length) return;
+      if (states[index] !== 'idle') return;
+
+      const card = videoCards[index];
+      const video = card.querySelector('video');
+      const source = video ? video.querySelector('source') : null;
+
+      if (!source || !source.dataset.src || source.getAttribute('src')) {
+        states[index] = 'loaded';
+        loadingIndex = -1;
+        processQueue();
+        return;
+      }
+
+      states[index] = 'loading';
+      loadingIndex = index;
+
+      source.src = source.dataset.src;
+      video.src = source.dataset.src;
+      video.preload = 'metadata'; // Keeps download lightweight (only metadata/first frame)
+      video.load();
+
+      const markDone = () => {
+        if (states[index] === 'loaded') return;
+        states[index] = 'loaded';
+        loadingIndex = -1;
+        processQueue();
+      };
+
+      video.addEventListener('loadedmetadata', markDone, { once: true });
+      video.addEventListener('canplay', markDone, { once: true });
+      video.addEventListener('error', markDone, { once: true });
+      setTimeout(markDone, 8000); // Guard timeout
+    }
+
+    // --- Decide what to load next ---
+    function processQueue() {
+      if (loadingIndex !== -1) return;
+
+      // Priority videos first (user is scrolling toward them)
+      while (priorityQueue.length > 0) {
+        const idx = priorityQueue.shift();
+        if (states[idx] === 'idle') {
+          loadVideo(idx);
+          return;
+        }
+      }
+
+      // Continue sequential background chain
+      while (sequentialNext < videoCards.length) {
+        if (states[sequentialNext] === 'idle') {
+          const idx = sequentialNext;
+          sequentialNext++;
+          const schedule = window.requestIdleCallback
+            ? (cb) => window.requestIdleCallback(cb, { timeout: 4000 })
+            : (cb) => setTimeout(cb, 250);
+          schedule(() => loadVideo(idx));
+          return;
+        }
+        sequentialNext++;
+      }
+    }
 
     // --- Only one video plays at a time ---
     const allVideos = document.querySelectorAll('.video-card video');
     allVideos.forEach(video => {
       video.addEventListener('play', () => {
         allVideos.forEach(other => {
-          if (other !== video) other.pause();
+          if (other !== video && !other.paused) {
+            other.pause();
+          }
         });
       });
     });
+
+    // --- Load the first video on startup, then prepare subsequent videos sequentially ---
+    function kickoff() {
+      setTimeout(() => {
+        loadVideo(0);
+        sequentialNext = 1;
+      }, 600);
+    }
+
+    if (document.readyState === 'complete') {
+      kickoff();
+    } else {
+      window.addEventListener('load', kickoff, { once: true });
+    }
   }
 
   // ===== SKETCH PROGRESSIVE REVEAL =====
@@ -475,72 +575,66 @@
   // ===== VIDEO INTERACTIONS =====
   function setupVideoInteractions() {
     const videoCards = document.querySelectorAll('.video-card');
-    
-    // Override requestFullscreen to target wrapper instead of video
-    // This prevents Android Chrome from forcing a landscape rotation on fullscreen!
-    const originalRequestFullscreen = HTMLVideoElement.prototype.requestFullscreen || HTMLVideoElement.prototype.webkitRequestFullscreen;
-    if (originalRequestFullscreen) {
-      HTMLVideoElement.prototype.requestFullscreen = function(options) {
-        const wrapper = this.closest('.video-wrapper');
-        if (wrapper) {
-          return wrapper.requestFullscreen ? wrapper.requestFullscreen(options) : wrapper.webkitRequestFullscreen(options);
-        }
-        return originalRequestFullscreen.call(this, options);
-      };
-      // Polyfill for webkit
-      HTMLVideoElement.prototype.webkitRequestFullscreen = HTMLVideoElement.prototype.requestFullscreen;
-    }
 
     videoCards.forEach(card => {
-      const wrapper = card.querySelector('.video-wrapper');
       const video = card.querySelector('video');
-      if (!video || !wrapper) return;
+      const customBtn = card.querySelector('.custom-play-pause');
+      if (!video) return;
 
       let manualPlay = false;
 
-      // Desktop Hover Preview
+      // Desktop Hover Preview (only on non-touch desktop devices)
       if (!isMobile) {
         card.addEventListener('mouseenter', () => {
-          if (!manualPlay) {
-             video.muted = true;
-             video.play().catch(()=>{});
+          if (!manualPlay && video.paused) {
+            video.muted = true;
+            ensureVideoSource(video);
+            video.play().catch(() => {});
           }
         });
         card.addEventListener('mouseleave', () => {
-          if (!manualPlay) {
+          if (!manualPlay && !video.paused) {
             video.pause();
           }
         });
       }
 
-      // Wrapper Click for custom Play/Pause
-      wrapper.addEventListener('click', (e) => {
-        const rect = wrapper.getBoundingClientRect();
-        const clickY = e.clientY - rect.top;
-        
-        // If clicking the bottom 25%, assume native controls interaction
-        if (clickY > rect.height * 0.75) return;
-        
-        // Prevent default to avoid interfering with native double-taps if any
-        e.preventDefault();
-        
-        manualPlay = true;
-        video.muted = false;
-        
-        if (video.paused) {
-          video.play().catch(()=>{});
-        } else {
-          video.pause();
-        }
-      });
-      
-      // Native Controls Events sync CSS states
-      video.addEventListener('pause', () => {
-        card.classList.remove('is-playing');
-      });
+      // Custom Play Button Direct Click / Tap Handler
+      if (customBtn) {
+        customBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          manualPlay = true;
+          video.muted = false; // Unmute on intentional user tap
+          ensureVideoSource(video);
+
+          if (video.paused) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(err => {
+                console.warn('Play request handled:', err);
+              });
+            }
+          } else {
+            video.pause();
+          }
+        });
+      }
+
+      // Sync CSS states with video events (both native and custom)
       video.addEventListener('play', () => {
         card.classList.add('is-playing');
       });
+
+      video.addEventListener('pause', () => {
+        card.classList.remove('is-playing');
+        manualPlay = false;
+      });
+
+      video.addEventListener('ended', () => {
+        card.classList.remove('is-playing');
+        manualPlay = false;
+      });
+
       video.addEventListener('volumechange', () => {
         if (!video.muted) manualPlay = true;
       });
