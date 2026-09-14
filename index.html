@@ -7,6 +7,7 @@
   <meta name="description" content="I'm Alok. I edit videos and sketch things I love. 8 years of editing, 100+ videos, 5M+ views. This is my creative space.">
   <meta name="theme-color" content="#06060b">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 </head>
 <body>
@@ -18,6 +19,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#edits">Edits</a></li>
       <li><a href="#sketches">Sketches</a></li>
+      <li><a href="#gear">Gear</a></li>
     </ul>
     <div class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu">
       <span></span>
@@ -31,6 +33,7 @@
     <a href="#about">About</a>
     <a href="#edits">Edits</a>
     <a href="#sketches">Sketches</a>
+    <a href="#gear">Gear</a>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -41,23 +44,29 @@
         <span class="dot"></span>
         Creative Space
       </div>
-      <h1 class="reveal reveal-delay-1">
-        I edit videos<br>&amp; I <span class="gradient-text">sketch</span> things.
+      <h1 class="reveal reveal-delay-1 hero-title">
+        <span class="word"><span class="word-inner">I</span></span>
+        <span class="word"><span class="word-inner">edit</span></span>
+        <span class="word"><span class="word-inner">videos</span></span><br>
+        <span class="word"><span class="word-inner">&amp;</span></span>
+        <span class="word"><span class="word-inner">I</span></span>
+        <span class="word"><span class="word-inner"><span class="gradient-text">sketch</span></span></span>
+        <span class="word"><span class="word-inner">things.</span></span>
       </h1>
       <p class="hero-subtitle reveal reveal-delay-2">
         I'm Alok , 8 years of video editing, 5M+ views, and a love for putting pencil to paper.
       </p>
       <div class="hero-stats reveal reveal-delay-3">
         <div class="hero-stat">
-          <div class="hero-stat-number">8+</div>
+          <div class="hero-stat-number stat-counter" data-target="8" data-suffix="+">0</div>
           <div class="hero-stat-label">Years Editing</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-number">500+</div>
+          <div class="hero-stat-number stat-counter" data-target="500" data-suffix="+">0</div>
           <div class="hero-stat-label">Videos Made</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-number">5M+</div>
+          <div class="hero-stat-number stat-counter" data-target="5" data-suffix="M+">0</div>
           <div class="hero-stat-label">Total Views</div>
         </div>
       </div>
@@ -129,9 +138,12 @@
     <div class="videos-showcase">
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260912152125.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260912152125.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Rengoku</span>
           <span class="video-card-badge">Latest</span>
@@ -139,9 +151,12 @@
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260912145330.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260912145330.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Grid Transition</span>
           <span class="video-card-badge">Latest</span>
@@ -149,63 +164,84 @@
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260728153128.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260728153128.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Spider Man BND</span>
         </div>
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/VID-20260724-WA0007.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260725131639.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
-          <span class="video-card-label">Tanjiro</span>
+          <span class="video-card-label">Edit 07/25</span>
         </div>
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260708195733.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260708195733.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Kung Fu Panda</span>
         </div>
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260530141335.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260530141335.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Your Name</span>
         </div>
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260527164845.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260527164845.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Moon Knight</span>
         </div>
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260517213011.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260517213011.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Tanjiro 2</span>
         </div>
       </div>
 
       <div class="video-card">
-        <video controls preload="none" playsinline>
-          <source data-src="Edits/lv_0_20260513151901.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+          <video controls preload="none" playsinline>
+            <source data-src="Edits/lv_0_20260513151901.mp4" type="video/mp4">
+          </video>
+          <button class="mobile-play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+        </div>
         <div class="video-card-info">
           <span class="video-card-label">Iron Man</span>
         </div>
@@ -224,154 +260,154 @@
     <div class="sketches-grid">
 
       <div class="sketch-card" data-index="0">
-        <img src="Sketchs/IMG_20260516_204227.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260914_182625.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="1">
-        <img src="Sketchs/IMG_20260513_231609_646.webp" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260914_182603.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="2">
-        <img src="Sketchs/IMG_20260513_231401_096.webp" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260914_181804.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="3">
-        <img src="Sketchs/IMG_20260512_181804.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260914_181642.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="4">
-        <img src="Sketchs/IMG_20260504_215423.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260516_204227.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="5">
-        <img src="Sketchs/IMG_20260504_171132.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260513_231609_646.webp" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="6">
-        <img src="Sketchs/IMG_20260502_130724.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260513_231401_096.webp" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="7">
-        <img src="Sketchs/IMG_20260423_221858.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260512_181804.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="8">
-        <img src="Sketchs/IMG_20260420_210725.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260504_215423.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="9">
-        <img src="Sketchs/IMG_20260410_110602.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260504_171132.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="10">
-        <img src="Sketchs/IMG_20260408_213535.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG20260502130015.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="11">
-        <img src="Sketchs/IMG_20260404_210240.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260423_221858.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="12">
-        <img src="Sketchs/IMG_20260404_204401.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260420_210725.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="13">
-        <img src="Sketchs/IMG_20260401_231011.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260414_170052.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="14">
-        <img src="Sketchs/IMG_20260302_015250.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260410_110602.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="15">
-        <img src="Sketchs/IMG20260320230709.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260408_213535.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="16">
-        <img src="Sketchs/IMG20260304225316.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260404_210240.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="17">
-        <img src="Sketchs/IMG_20260110_225734_178.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260404_204401.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="18">
-        <img src="Sketchs/IMG_20251216_225243_752.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260401_231011.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="19">
-        <img src="Sketchs/IMG_20251210_175713_811.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG_20260302_015250.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="20">
-        <img src="Sketchs/20260223_011453.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG20260320230709.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
       </div>
 
       <div class="sketch-card" data-index="21">
-        <img src="Sketchs/20260222_181524.jpg" alt="Sketch" loading="lazy">
+        <img src="Sketchs/IMG20260304225316.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
@@ -379,6 +415,13 @@
 
       <div class="sketch-card" data-index="22">
         <img src="Sketchs/20260216_134549.jpg" alt="Sketch" loading="lazy">
+        <div class="sketch-expand-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+      </div>
+
+      <div class="sketch-card" data-index="23">
+        <img src="Sketchs/IMG_20260110_225734_178.jpg" alt="Sketch" loading="lazy">
         <div class="sketch-expand-icon">
           <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
         </div>
@@ -401,6 +444,122 @@
     </button>
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
+
+  <!-- ===== MY GEAR ===== -->
+  <div class="section-divider"></div>
+  <section class="section" id="gear">
+    <div class="section-header reveal">
+      <span class="section-label">My Gear</span>
+      <h2 class="section-title">What I use every day</h2>
+    </div>
+
+    <div class="gear-showcase">
+
+      <!-- ASUS Gaming V16 -->
+      <div class="gear-device gear-device--wide" data-gear="0">
+        <div class="gear-device-visual">
+          <div class="gear-glow"></div>
+          <img src="assets/asus-gaming-v16.jpg" alt="ASUS Gaming V16 Laptop" loading="lazy">
+        </div>
+        <div class="gear-device-info">
+          <span class="gear-device-tag">Primary Machine</span>
+          <h3 class="gear-device-name">ASUS Gaming V16</h3>
+          <ul class="gear-specs">
+            <li><span class="gear-spec-icon">⚡</span> NVIDIA RTX 4050 — 6GB GDDR6</li>
+            <li><span class="gear-spec-icon">🧠</span> Intel Core 5 210H — 8C / 12T</li>
+            <li><span class="gear-spec-icon">💾</span> 16GB DDR5 5200MHz</li>
+            <li><span class="gear-spec-icon">📦</span> 512GB PCIe 4.0 NVMe SSD</li>
+            <li><span class="gear-spec-icon">🖥️</span> 16″ FHD+ 144Hz — 100% sRGB</li>
+            <li><span class="gear-spec-icon">❄️</span> Dual-Fan Cooling</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- realme P4x -->
+      <div class="gear-device" data-gear="1">
+        <div class="gear-device-visual">
+          <div class="gear-glow"></div>
+          <img src="assets/realme-p4x.jpg" alt="realme P4x Smartphone" loading="lazy">
+        </div>
+        <div class="gear-device-info">
+          <span class="gear-device-tag">Daily Driver</span>
+          <h3 class="gear-device-name">realme P4x</h3>
+          <ul class="gear-specs">
+            <li><span class="gear-spec-icon">📡</span> Dimensity 7400 Ultra 5G</li>
+            <li><span class="gear-spec-icon">🖥️</span> 144Hz Display</li>
+            <li><span class="gear-spec-icon">🔋</span> 7000mAh Battery</li>
+            <li><span class="gear-spec-icon">💾</span> 6GB + 128GB Storage</li>
+            <li><span class="gear-spec-icon">💧</span> IP65 Dust & Water Resistance</li>
+            <li><span class="gear-spec-icon">🔊</span> Dual Stereo Speakers</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- realme Buds Air 7 -->
+      <div class="gear-device" data-gear="2">
+        <div class="gear-device-visual">
+          <div class="gear-glow"></div>
+          <img src="assets/realme-buds-air-7.jpg" alt="realme Buds Air 7" loading="lazy">
+        </div>
+        <div class="gear-device-info">
+          <span class="gear-device-tag">Audio</span>
+          <h3 class="gear-device-name">realme Buds Air 7</h3>
+          <ul class="gear-specs">
+            <li><span class="gear-spec-icon">🔇</span> 52dB Hybrid ANC</li>
+            <li><span class="gear-spec-icon">🎵</span> 12.4mm Dynamic Bass Driver</li>
+            <li><span class="gear-spec-icon">🎧</span> Hi-Res Audio + LHDC</li>
+            <li><span class="gear-spec-icon">🔋</span> Up to 52 Hours Battery</li>
+            <li><span class="gear-spec-icon">🌐</span> 360° Spatial Audio</li>
+            <li><span class="gear-spec-icon">🎤</span> 6-Mic ENC · IP55 Rated</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== LET'S CONNECT ===== -->
+  <div class="section-divider"></div>
+  <section class="section section--connect" id="connect">
+    <div class="section-header reveal">
+      <span class="section-label">Let's Connect</span>
+      <h2 class="section-title">Say hello</h2>
+    </div>
+
+    <div class="connect-grid">
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/alok-%E2%80%8B-8b5a272b9" target="_blank" rel="noopener noreferrer" class="connect-card connect-card--linkedin" id="connectLinkedin">
+        <div class="connect-card-glow"></div>
+        <div class="connect-card-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div class="connect-card-content">
+          <span class="connect-card-name">LinkedIn</span>
+          <span class="connect-card-desc">Connect with me on LinkedIn</span>
+        </div>
+        <div class="connect-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </div>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/atpx_studio?stkn=MThiaDExcWttMGZ3YQ==" target="_blank" rel="noopener noreferrer" class="connect-card connect-card--instagram" id="connectInstagram">
+        <div class="connect-card-glow"></div>
+        <div class="connect-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><circle cx="12" cy="12" r="5"></circle><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"></circle></svg>
+        </div>
+        <div class="connect-card-content">
+          <span class="connect-card-name">Instagram</span>
+          <span class="connect-card-desc">Behind the scenes on Instagram</span>
+        </div>
+        <div class="connect-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </div>
+      </a>
+
+    </div>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">

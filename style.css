@@ -833,6 +833,365 @@ a:hover {
   z-index: 1001;
 }
 
+/* ===== MY GEAR SECTION ===== */
+.gear-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.gear-device {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  /* Animation initial state */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color var(--transition-smooth),
+              box-shadow var(--transition-smooth);
+}
+
+.gear-device.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: hover) {
+  .gear-device:hover {
+    border-color: var(--border-glass-hover);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+  }
+}
+
+/* Alternating layout for variety */
+.gear-device:nth-child(even) {
+  direction: rtl;
+}
+.gear-device:nth-child(even) > * {
+  direction: ltr;
+}
+
+/* Device image area */
+.gear-device-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.gear-device-visual img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  position: relative;
+  z-index: 1;
+  /* Image animation */
+  opacity: 0;
+  transform: scale(0.88) translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
+              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+}
+
+.gear-device.visible .gear-device-visual img {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Ambient glow behind device image */
+.gear-glow {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0;
+  filter: blur(40px);
+  transition: opacity 1s ease 0.3s;
+  z-index: 0;
+}
+
+.gear-device.visible .gear-glow {
+  opacity: 1;
+}
+
+/* Device info area */
+.gear-device-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gear-device-tag {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.25rem 0.7rem;
+  background: var(--accent-glow);
+  border: 1px solid rgba(232, 160, 52, 0.2);
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  /* Stagger animation */
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.25s, transform 0.5s ease 0.25s;
+}
+
+.gear-device.visible .gear-device-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gear-device-name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  /* Stagger animation */
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.35s, transform 0.5s ease 0.35s;
+}
+
+.gear-device.visible .gear-device-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Specs list */
+.gear-specs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.gear-specs li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.6rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-sm);
+  /* Stagger animation — each li gets a different delay via JS */
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.gear-device.visible .gear-specs li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delays for spec items */
+.gear-device.visible .gear-specs li:nth-child(1) { transition-delay: 0.4s; }
+.gear-device.visible .gear-specs li:nth-child(2) { transition-delay: 0.48s; }
+.gear-device.visible .gear-specs li:nth-child(3) { transition-delay: 0.56s; }
+.gear-device.visible .gear-specs li:nth-child(4) { transition-delay: 0.64s; }
+.gear-device.visible .gear-specs li:nth-child(5) { transition-delay: 0.72s; }
+.gear-device.visible .gear-specs li:nth-child(6) { transition-delay: 0.8s; }
+.gear-device.visible .gear-specs li:nth-child(7) { transition-delay: 0.88s; }
+
+@media (hover: hover) {
+  .gear-specs li:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.gear-spec-icon {
+  font-size: 0.9rem;
+  min-width: 1.2rem;
+  text-align: center;
+  line-height: 1;
+}
+
+/* ===== LET'S CONNECT SECTION ===== */
+.section--connect {
+  padding-bottom: 4rem;
+}
+
+.connect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.connect-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--text-primary);
+  overflow: hidden;
+  cursor: pointer;
+  /* Scroll reveal */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color var(--transition-smooth),
+              box-shadow var(--transition-smooth);
+}
+
+.connect-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger: second card slightly delayed */
+.connect-card:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+/* Brand glow — positioned behind */
+.connect-card-glow {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.connect-card--linkedin .connect-card-glow {
+  background: rgba(10, 102, 194, 0.25);
+}
+
+.connect-card--instagram .connect-card-glow {
+  background: linear-gradient(135deg, rgba(253, 29, 29, 0.2), rgba(131, 58, 180, 0.2), rgba(252, 176, 69, 0.15));
+}
+
+@media (hover: hover) {
+  .connect-card:hover .connect-card-glow {
+    opacity: 1;
+  }
+
+  .connect-card:hover {
+    border-color: var(--border-glass-hover);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Icon container */
+.connect-card-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-spring);
+}
+
+.connect-card--linkedin .connect-card-icon {
+  background: rgba(10, 102, 194, 0.12);
+  color: #0a66c2;
+}
+
+.connect-card--instagram .connect-card-icon {
+  background: linear-gradient(135deg, rgba(253, 29, 29, 0.1), rgba(131, 58, 180, 0.12));
+  color: #e1306c;
+}
+
+.connect-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (hover: hover) {
+  .connect-card:hover .connect-card-icon {
+    transform: scale(1.1) rotate(-4deg);
+  }
+}
+
+/* Text content */
+.connect-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.connect-card-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.connect-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Arrow icon */
+.connect-card-arrow {
+  margin-left: auto;
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-smooth), color var(--transition-fast);
+}
+
+.connect-card-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (hover: hover) {
+  .connect-card:hover .connect-card-arrow {
+    transform: translate(3px, -3px);
+    color: var(--text-primary);
+  }
+}
+
 /* ===== FOOTER ===== */
 .footer {
   text-align: center;
@@ -895,6 +1254,19 @@ a:hover {
   .about-grid {
     gap: 3rem;
   }
+
+  .gear-device {
+    gap: 2rem;
+    padding: 1.75rem;
+  }
+
+  .gear-device-visual {
+    min-height: 180px;
+  }
+
+  .gear-device-visual img {
+    max-height: 260px;
+  }
 }
 
 /* Small Tablet / Large Phone */
@@ -929,6 +1301,37 @@ a:hover {
     gap: 4rem;
   }
 
+  .gear-device {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .gear-device:nth-child(even) {
+    direction: ltr;
+  }
+
+  .gear-device-visual {
+    min-height: 160px;
+  }
+
+  .gear-device-visual img {
+    max-height: 240px;
+  }
+
+  .gear-device-info {
+    align-items: center;
+  }
+
+  .gear-specs li {
+    justify-content: center;
+  }
+
+  .gear-showcase {
+    gap: 3rem;
+  }
+
   .video-card {
     max-width: 100%;
   }
@@ -944,10 +1347,39 @@ a:hover {
     width: 40px;
     height: 40px;
   }
+
+  .connect-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
 }
 
 /* Phone */
 @media (max-width: 480px) {
+  .connect-card {
+    padding: 1.2rem 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .connect-card-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .connect-card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .connect-card-name {
+    font-size: 0.92rem;
+  }
+
+  .connect-card-desc {
+    font-size: 0.75rem;
+  }
+
   .nav {
     padding: 0.75rem 1rem;
   }
@@ -1004,6 +1436,28 @@ a:hover {
 
   .videos-showcase {
     gap: 3rem;
+  }
+
+  .gear-device {
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .gear-device-visual img {
+    max-height: 200px;
+  }
+
+  .gear-device-name {
+    font-size: 1.3rem;
+  }
+
+  .gear-specs li {
+    font-size: 0.82rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .gear-showcase {
+    gap: 2.5rem;
   }
 
   .journey-step-name {

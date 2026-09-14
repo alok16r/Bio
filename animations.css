@@ -1,0 +1,227 @@
+/* ===== CINEMATIC ANIMATIONS ===== */
+
+:root {
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Utility --- */
+.will-change-transform {
+  will-change: transform, opacity;
+}
+
+/* --- Hero Word Reveal --- */
+.hero-title .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.hero-title .word-inner {
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.8s var(--ease-out-expo), opacity 0.8s ease-out;
+}
+
+.hero-title.visible .word-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger words */
+.hero-title .word:nth-child(1) .word-inner { transition-delay: 0.1s; }
+.hero-title .word:nth-child(2) .word-inner { transition-delay: 0.15s; }
+.hero-title .word:nth-child(3) .word-inner { transition-delay: 0.2s; }
+.hero-title .word:nth-child(5) .word-inner { transition-delay: 0.25s; }
+.hero-title .word:nth-child(6) .word-inner { transition-delay: 0.3s; }
+.hero-title .word:nth-child(7) .word-inner { transition-delay: 0.35s; }
+.hero-title .word:nth-child(8) .word-inner { transition-delay: 0.4s; }
+
+/* --- Stats Count-Up --- */
+.stat-counter::after {
+  content: attr(data-suffix);
+}
+
+/* --- Video Showcase Enhancements --- */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #050508;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0; /* Handled by wrapper */
+  opacity: 0.5; /* Dimmed initially for preview effect */
+  transform: scale(1.02);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.mobile-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 64px;
+  height: 64px;
+  background: rgba(232, 160, 52, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 160, 52, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.8;
+  transition: all 0.4s var(--ease-out-back);
+}
+
+.mobile-play-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--accent);
+  margin-left: 4px; /* visually center the play triangle */
+}
+
+/* Pulse effect for mobile play button */
+@keyframes playPulse {
+  0% { box-shadow: 0 0 0 0 rgba(232, 160, 52, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(232, 160, 52, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(232, 160, 52, 0); }
+}
+
+.mobile-play-btn {
+  animation: playPulse 2.5s infinite;
+}
+
+/* Hover/Active states for videos */
+@media (hover: hover) {
+  .video-card:hover .video-wrapper video {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .video-card:hover .mobile-play-btn {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2);
+    pointer-events: none;
+  }
+}
+
+.video-card.is-playing .video-wrapper video {
+  opacity: 1;
+  transform: scale(1);
+}
+.video-card.is-playing .mobile-play-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- Sketches Staggered Reveal --- */
+.sketch-card {
+  transform-origin: center center;
+}
+/* Random rotation handled in JS for non-mobile */
+
+/* --- Lightbox FLIP classes --- */
+.lightbox-animating {
+  transition: transform 0.6s var(--ease-in-out-circ), opacity 0.4s ease;
+}
+
+/* --- Device 3D Tilt --- */
+.gear-device-visual {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.gear-device-visual img {
+  transition: transform 0.2s ease-out; /* Fast smooth follow */
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  /* Mobile breathing animation for gear */
+  @keyframes floatBreathing {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
+  }
+  .gear-device-visual img {
+    animation: floatBreathing 6s ease-in-out infinite;
+  }
+}
+
+/* --- Let's Connect Magnetic --- */
+.connect-card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.connect-card:hover {
+  z-index: 2;
+}
+
+/* Glow sweep */
+.connect-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.connect-card:hover .connect-card-glow {
+  opacity: 1;
+}
+
+/* Continuous float at rest */
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.connect-card-icon {
+  animation: subtleFloat 4s ease-in-out infinite;
+}
+
+/* Mobile tap ripple/scale */
+.connect-card:active {
+  transform: scale(0.96);
+  transition: transform 0.1s;
+}
+
+/* --- Accessibility --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .hero-title .word-inner,
+  .reveal {
+    opacity: 0;
+    transform: none;
+    transition: opacity 0.5s ease !important;
+  }
+  .hero-title.visible .word-inner,
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .video-card:hover .video-wrapper video {
+    transform: none;
+  }
+}
