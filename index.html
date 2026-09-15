@@ -12,6 +12,71 @@
 </head>
 <body>
 
+  <!-- ===== INSTAGRAM IN-APP BROWSER DETECTION ===== -->
+  <div class="ig-overlay" id="igOverlay">
+    <div class="ig-overlay-content">
+      <div class="ig-overlay-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M2 12h20"></path>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </div>
+      <h2 class="ig-overlay-title">Open in your browser</h2>
+      <p class="ig-overlay-desc">For the best experience, open this website in Chrome or your preferred browser.</p>
+      <button class="ig-overlay-btn" id="igOpenBtn">
+        Open in Browser
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+      <p class="ig-overlay-hint" id="igHint">
+        Or tap <strong>⋮</strong> (menu) at the top right → <strong>Open in browser</strong>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Instagram in-app browser detection — runs immediately, before CSS/JS fully load
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || '';
+      var isInstagram = /Instagram/i.test(ua);
+      var overlay = document.getElementById('igOverlay');
+
+      if (!isInstagram) {
+        // Not Instagram — remove overlay instantly, no flash
+        if (overlay) overlay.parentNode.removeChild(overlay);
+        return;
+      }
+
+      // Instagram detected — show overlay, hide main content
+      overlay.classList.add('ig-active');
+      document.documentElement.classList.add('ig-detected');
+
+      var btn = document.getElementById('igOpenBtn');
+      var currentUrl = window.location.href;
+
+      btn.addEventListener('click', function() {
+        // Try intent:// on Android (most reliable for opening external browser)
+        var isAndroid = /Android/i.test(ua);
+        if (isAndroid) {
+          // Intent URL to open in default browser
+          var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') +
+            '#Intent;scheme=https;package=com.android.chrome;end';
+          window.location.href = intentUrl;
+          // Fallback after a short delay if intent didn't work
+          setTimeout(function() {
+            window.open(currentUrl, '_system');
+          }, 500);
+        } else {
+          // iOS — try window.open (sometimes works in newer Instagram versions)
+          window.open(currentUrl, '_blank');
+        }
+      });
+    })();
+  </script>
+
   <!-- ===== NAVIGATION ===== -->
   <nav class="nav" id="nav">
     <div class="nav-logo">alok.</div>
