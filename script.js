@@ -84,166 +84,9 @@
     revealElements.forEach(el => observer.observe(el));
   }
 
-  // ===== HELPER: Ensure Video Source is Set =====
-  function ensureVideoSource(video) {
-    if (!video) return;
-    const source = video.querySelector('source');
-    if (source && source.dataset.src) {
-      if (!source.getAttribute('src')) {
-        source.src = source.dataset.src;
-      }
-      if (!video.src && !video.currentSrc) {
-        video.src = source.dataset.src;
-        video.preload = 'auto';
-        video.load();
-      }
-    }
-  }
 
-  // ===== PROGRESSIVE SEQUENTIAL VIDEO LOADER =====
-  // Loads the first video on open, prepares subsequent videos sequentially in background,
-  // and prioritizes any video approaching viewport via IntersectionObserver.
-  function setupVideoShowcase() {
-    const videoCards = document.querySelectorAll('.video-card');
-    if (videoCards.length === 0) return;
 
-    // Per-video state: 'idle' → 'loading' → 'loaded'
-    const states = Array.from(videoCards, () => 'idle');
-    let sequentialNext = 0;     // Next index for background progressive loading
-    let loadingIndex = -1;      // Index currently downloading (-1 = none)
-    const priorityQueue = [];   // Indices approaching viewport (load with priority)
 
-    // --- 1. Card scroll-reveal animation ---
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          visibilityObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.05,
-      rootMargin: '80px 0px 0px 0px'
-    });
-    videoCards.forEach(card => visibilityObserver.observe(card));
-
-    // --- 2. Pause videos that scroll out of view ---
-    const playbackObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const video = entry.target.querySelector('video');
-        if (!entry.isIntersecting && video && !video.paused) {
-          video.pause();
-        }
-      });
-    }, { threshold: 0 });
-    videoCards.forEach(card => playbackObserver.observe(card));
-
-    // --- 3. Priority observer: if user scrolls near a video, queue it next ---
-    const priorityObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = Array.from(videoCards).indexOf(entry.target);
-          if (idx !== -1 && states[idx] === 'idle' && !priorityQueue.includes(idx)) {
-            priorityQueue.push(idx);
-            processQueue();
-          }
-          priorityObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      rootMargin: '400px 0px 200px 0px'  // Trigger well before the card is on-screen
-    });
-    videoCards.forEach(card => priorityObserver.observe(card));
-
-    // --- Load a single video by index ---
-    function loadVideo(index) {
-      if (index < 0 || index >= videoCards.length) return;
-      if (states[index] !== 'idle') return;
-
-      const card = videoCards[index];
-      const video = card.querySelector('video');
-      const source = video ? video.querySelector('source') : null;
-
-      if (!source || !source.dataset.src || source.getAttribute('src')) {
-        states[index] = 'loaded';
-        loadingIndex = -1;
-        processQueue();
-        return;
-      }
-
-      states[index] = 'loading';
-      loadingIndex = index;
-
-      source.src = source.dataset.src;
-      video.src = source.dataset.src;
-      video.preload = 'auto'; // Progressive background buffering
-      video.load();
-
-      const markDone = () => {
-        if (states[index] === 'loaded') return;
-        states[index] = 'loaded';
-        loadingIndex = -1;
-        processQueue();
-      };
-
-      video.addEventListener('canplaythrough', markDone, { once: true });
-      video.addEventListener('canplay', markDone, { once: true }); // Fallback if canplaythrough is delayed
-      video.addEventListener('error', markDone, { once: true });
-      setTimeout(markDone, 15000); // Guard timeout increased for buffering
-    }
-
-    // --- Decide what to load next ---
-    function processQueue() {
-      if (loadingIndex !== -1) return;
-
-      // Priority videos first (user is scrolling toward them)
-      while (priorityQueue.length > 0) {
-        const idx = priorityQueue.shift();
-        if (states[idx] === 'idle') {
-          loadVideo(idx);
-          return;
-        }
-      }
-
-      // Continue sequential background chain
-      while (sequentialNext < videoCards.length) {
-        if (states[sequentialNext] === 'idle') {
-          const idx = sequentialNext;
-          sequentialNext++;
-          const schedule = window.requestIdleCallback
-            ? (cb) => window.requestIdleCallback(cb, { timeout: 4000 })
-            : (cb) => setTimeout(cb, 250);
-          schedule(() => loadVideo(idx));
-          return;
-        }
-        sequentialNext++;
-      }
-    }
-
-    // --- Only one video plays at a time ---
-    const allVideos = document.querySelectorAll('.video-card video');
-    allVideos.forEach(video => {
-      video.addEventListener('play', () => {
-        allVideos.forEach(other => {
-          if (other !== video && !other.paused) {
-            other.pause();
-          }
-        });
-      });
-    });
-
-    // --- Load the first video on startup, then prepare subsequent videos sequentially ---
-    function kickoff() {
-      loadVideo(0);
-      sequentialNext = 1;
-    }
-
-    if (document.readyState === 'complete') {
-      kickoff();
-    } else {
-      window.addEventListener('load', kickoff, { once: true });
-    }
-  }
 
   // ===== SKETCH PROGRESSIVE REVEAL =====
   function setupSketchReveal() {
@@ -344,13 +187,7 @@
         }
       });
 
-      // Same for video cards (visibility only; loading handled by sequential loader)
-      document.querySelectorAll('.video-card:not(.visible)').forEach(card => {
-        const rect = card.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 100) {
-          card.classList.add('visible');
-        }
-      });
+
 
       // Same for sketch cards
       document.querySelectorAll('.sketch-card:not(.visible)').forEach(card => {
@@ -570,74 +407,7 @@
     counters.forEach(c => observer.observe(c));
   }
 
-  // ===== VIDEO INTERACTIONS =====
-  function setupVideoInteractions() {
-    const videoCards = document.querySelectorAll('.video-card');
 
-    videoCards.forEach(card => {
-      const video = card.querySelector('video');
-      const customBtn = card.querySelector('.custom-play-pause');
-      if (!video) return;
-
-      let manualPlay = false;
-
-      // Desktop Hover Preview (only on non-touch desktop devices)
-      if (!isMobile) {
-        card.addEventListener('mouseenter', () => {
-          if (!manualPlay && video.paused) {
-            video.muted = true;
-            ensureVideoSource(video);
-            video.play().catch(() => {});
-          }
-        });
-        card.addEventListener('mouseleave', () => {
-          if (!manualPlay && !video.paused) {
-            video.pause();
-          }
-        });
-      }
-
-      // Custom Play Button Direct Click / Tap Handler
-      if (customBtn) {
-        customBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          manualPlay = true;
-          video.muted = false; // Unmute on intentional user tap
-          ensureVideoSource(video);
-
-          if (video.paused) {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(err => {
-                console.warn('Play request handled:', err);
-              });
-            }
-          } else {
-            video.pause();
-          }
-        });
-      }
-
-      // Sync CSS states with video events (both native and custom)
-      video.addEventListener('play', () => {
-        card.classList.add('is-playing');
-      });
-
-      video.addEventListener('pause', () => {
-        card.classList.remove('is-playing');
-        manualPlay = false;
-      });
-
-      video.addEventListener('ended', () => {
-        card.classList.remove('is-playing');
-        manualPlay = false;
-      });
-
-      video.addEventListener('volumechange', () => {
-        if (!video.muted) manualPlay = true;
-      });
-    });
-  }
 
   // ===== DEVICE 3D TILT =====
   function setupDeviceTilt() {
@@ -703,8 +473,6 @@
 
   createParticles();
   setupScrollReveal();
-  setupVideoShowcase();
-  setupVideoInteractions();
   setupSketchReveal();
   setupJourneyAnimation();
   setupGearReveal();
